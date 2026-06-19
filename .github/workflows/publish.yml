@@ -1,0 +1,64 @@
+name: publish
+
+# Rebuilds the signed apt + dnf repository and deploys it to GitHub Pages.
+#
+# Triggers:
+#   - workflow_dispatch:      manual rebuild / first seed
+#   - repository_dispatch:    a source tool fires this on its own release
+#                             (event type: package-released)
+# No schedule: the repo only rebuilds when a tool actually ships.
+
+on:
+  workflow_dispatch:
+  repository_dispatch:
+    types: [package-released]
+  push:
+    branches: [main]
+    paths:
+      - scripts/build.sh
+      - index.html
+      - .github/workflows/publish.yml
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    env:
+      GH_TOKEN: ${{ github.token }}
+      HOST: https://tamnd.github.io/linux-repo
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install repo tooling
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends \
+            dpkg-dev apt-utils createrepo-c rpm gnupg
+
+      - name: Build signed apt + dnf repository
+        env:
+          GPG_PRIVATE_KEY: ${{ secrets.LINUX_REPO_GPG_KEY }}
+        run: bash scripts/build.sh
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: public
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
+    steps:
+      - id: deploy
+        uses: actions/deploy-pages@v4

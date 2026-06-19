@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>tamnd Linux package repository</title>
+<style>
+  :root { color-scheme: light dark; }
+  body { font: 16px/1.6 -apple-system, system-ui, sans-serif; max-width: 46rem;
+         margin: 3rem auto; padding: 0 1.2rem; }
+  h1 { font-size: 1.6rem; }
+  h2 { font-size: 1.15rem; margin-top: 2.2rem; }
+  code, pre { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; }
+  pre { background: rgba(127,127,127,.12); padding: .9rem 1rem; border-radius: 8px;
+        overflow-x: auto; font-size: 14px; }
+  a { color: inherit; }
+  .muted { opacity: .7; }
+</style>
+</head>
+<body>
+<h1>tamnd Linux package repository</h1>
+<p>apt and dnf packages for the command line tools
+<a href="https://github.com/tamnd/yomi">yomi</a>,
+<a href="https://github.com/tamnd/kage">kage</a>, and
+<a href="https://github.com/tamnd/tori">tori</a>.
+The repository is GPG signed; the public key is at
+<a href="gpg.key">gpg.key</a>.</p>
+
+<h2>Debian, Ubuntu (apt)</h2>
+<pre>curl -fsSL https://tamnd.github.io/linux-repo/gpg.key \
+  | sudo gpg --dearmor -o /usr/share/keyrings/tamnd.gpg
+
+echo "deb [signed-by=/usr/share/keyrings/tamnd.gpg] https://tamnd.github.io/linux-repo/apt stable main" \
+  | sudo tee /etc/apt/sources.list.d/tamnd.list
+
+sudo apt update
+sudo apt install yomi kage tori</pre>
+
+<h2>Fedora, RHEL, openSUSE (dnf)</h2>
+<pre>sudo dnf config-manager --add-repo https://tamnd.github.io/linux-repo/dnf/tamnd.repo
+sudo dnf install yomi</pre>
+<p class="muted">On older systems use
+<code>dnf install 'dnf-command(config-manager)'</code> first, or drop
+<code>tamnd.repo</code> into <code>/etc/yum.repos.d/</code> by hand.</p>
+
+<h2>Updates</h2>
+<p>New versions arrive through the normal <code>apt upgrade</code> /
+<code>dnf upgrade</code>. The repository is rebuilt automatically whenever a tool
+publishes a release, never on a timer.</p>
+
+<h2>Other platforms</h2>
+<p class="muted">macOS: <code>brew install tamnd/tap/&lt;tool&gt;</code> &middot;
+Windows: <code>scoop bucket add tamnd https://github.com/tamnd/scoop-bucket</code> &middot;
+anywhere: <code>go install</code> or the container image on GHCR.</p>
+</body>
+</html>
