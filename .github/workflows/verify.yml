@@ -1,0 +1,48 @@
+name: verify
+
+# Proves the published repository really installs, against the live Pages URL.
+# Runs the exact commands a user runs, in a clean Debian and a clean Fedora.
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/verify.yml
+
+permissions:
+  contents: read
+
+jobs:
+  apt:
+    runs-on: ubuntu-latest
+    container: debian:stable-slim
+    steps:
+      - name: Install from the apt repo
+        run: |
+          set -eux
+          apt-get update
+          apt-get install -y --no-install-recommends curl gnupg ca-certificates
+          curl -fsSL https://tamnd.github.io/linux-repo/gpg.key \
+            | gpg --dearmor -o /usr/share/keyrings/tamnd.gpg
+          echo "deb [signed-by=/usr/share/keyrings/tamnd.gpg] https://tamnd.github.io/linux-repo/apt stable main" \
+            > /etc/apt/sources.list.d/tamnd.list
+          apt-get update
+          apt-get install -y yomi kage tori
+          command -v yomi kage tori
+          yomi --help >/dev/null && kage --help >/dev/null && tori --help >/dev/null
+          echo "apt install OK"
+
+  dnf:
+    runs-on: ubuntu-latest
+    container: fedora:latest
+    steps:
+      - name: Install from the dnf repo
+        run: |
+          set -eux
+          curl -fsSL https://tamnd.github.io/linux-repo/dnf/tamnd.repo \
+            -o /etc/yum.repos.d/tamnd.repo
+          dnf -y install yomi kage tori
+          command -v yomi kage tori
+          yomi --help >/dev/null && kage --help >/dev/null && tori --help >/dev/null
+          echo "dnf install OK"
