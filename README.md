@@ -2,7 +2,7 @@
 
 Signed apt and dnf package repositories for the command line tools
 [yomi](https://github.com/tamnd/yomi), [kage](https://github.com/tamnd/kage),
-[tori](https://github.com/tamnd/tori), and [aki](https://github.com/tamnd/aki).
+[tori](https://github.com/tamnd/tori), [aki](https://github.com/tamnd/aki), and [ami](https://github.com/tamnd/ami).
 
 The tree is served over GitHub Pages at
 **https://tamnd.github.io/linux-repo/** and is GPG signed. Install instructions
@@ -18,7 +18,7 @@ echo "deb [signed-by=/usr/share/keyrings/tamnd.gpg] https://tamnd.github.io/linu
   | sudo tee /etc/apt/sources.list.d/tamnd.list
 
 sudo apt update
-sudo apt install yomi kage tori aki
+sudo apt install yomi kage tori aki ami
 ```
 
 ## Fedora, RHEL, openSUSE

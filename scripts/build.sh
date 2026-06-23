@@ -16,7 +16,7 @@
 #
 set -euo pipefail
 
-TOOLS="${TOOLS:-yomi kage tori aki}"
+TOOLS="${TOOLS:-yomi kage tori aki ami}"
 OWNER="${OWNER:-tamnd}"
 HOST="${HOST:-https://tamnd.github.io/linux-repo}"
 
