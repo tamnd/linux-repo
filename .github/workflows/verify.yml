@@ -28,9 +28,9 @@ jobs:
           echo "deb [signed-by=/usr/share/keyrings/tamnd.gpg] https://tamnd.github.io/linux-repo/apt stable main" \
             > /etc/apt/sources.list.d/tamnd.list
           apt-get update
-          apt-get install -y yomi kage tori aki ami
-          command -v yomi kage tori aki ami
-          yomi --help >/dev/null && kage --help >/dev/null && tori --help >/dev/null && aki --help >/dev/null && ami --help >/dev/null
+          apt-get install -y yomi kage tori aki ami ccrawl
+          command -v yomi kage tori aki ami ccrawl
+          yomi --help >/dev/null && kage --help >/dev/null && tori --help >/dev/null && aki --help >/dev/null && ami --help >/dev/null && ccrawl --help >/dev/null
           echo "apt install OK"
 
   dnf:
@@ -42,7 +42,7 @@ jobs:
           set -eux
           curl -fsSL https://tamnd.github.io/linux-repo/dnf/tamnd.repo \
             -o /etc/yum.repos.d/tamnd.repo
-          dnf -y install yomi kage tori aki ami
-          command -v yomi kage tori aki ami
-          yomi --help >/dev/null && kage --help >/dev/null && tori --help >/dev/null && aki --help >/dev/null && ami --help >/dev/null
+          dnf -y install yomi kage tori aki ami ccrawl
+          command -v yomi kage tori aki ami ccrawl
+          yomi --help >/dev/null && kage --help >/dev/null && tori --help >/dev/null && aki --help >/dev/null && ami --help >/dev/null && ccrawl --help >/dev/null
           echo "dnf install OK"
