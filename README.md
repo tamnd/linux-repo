@@ -4,7 +4,7 @@ Signed apt and dnf package repositories for the command line tools
 [yomi](https://github.com/tamnd/yomi), [kage](https://github.com/tamnd/kage),
 [tori](https://github.com/tamnd/tori), [aki](https://github.com/tamnd/aki), [ami](https://github.com/tamnd/ami),
 [kaku](https://github.com/tamnd/kaku), [shirabe](https://github.com/tamnd/shirabe),
-and [ccrawl](https://github.com/tamnd/ccrawl-cli).
+[ccrawl](https://github.com/tamnd/ccrawl-cli), and [tomo](https://github.com/tamnd/tomo).
 
 The tree is served over GitHub Pages at
 **https://tamnd.github.io/linux-repo/** and is GPG signed. Install instructions
@@ -20,7 +20,7 @@ echo "deb [signed-by=/usr/share/keyrings/tamnd.gpg] https://tamnd.github.io/linu
   | sudo tee /etc/apt/sources.list.d/tamnd.list
 
 sudo apt update
-sudo apt install yomi kage tori aki ami ccrawl kaku shirabe
+sudo apt install yomi kage tori aki ami ccrawl kaku shirabe tomo
 ```
 
 ## Fedora, RHEL, openSUSE

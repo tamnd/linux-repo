@@ -19,7 +19,7 @@ set -euo pipefail
 # Entries are repository names under the owner, not package names. They match
 # for every tool except ccrawl, whose repo is ccrawl-cli but whose package and
 # command are named ccrawl.
-TOOLS="${TOOLS:-yomi kage tori aki ami ccrawl-cli kaku shirabe}"
+TOOLS="${TOOLS:-yomi kage tori aki ami ccrawl-cli kaku shirabe tomo}"
 OWNER="${OWNER:-tamnd}"
 HOST="${HOST:-https://tamnd.github.io/linux-repo}"
 
