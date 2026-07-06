@@ -21,6 +21,8 @@
 <h1>tamnd Linux package repository</h1>
 <p>apt and dnf packages for the command line tools
 <a href="https://github.com/tamnd/yomi">yomi</a>,
+<a href="https://github.com/tamnd/kaku">kaku</a>,
+<a href="https://github.com/tamnd/shirabe">shirabe</a>,
 <a href="https://github.com/tamnd/kage">kage</a>,
 <a href="https://github.com/tamnd/tori">tori</a>,
 <a href="https://github.com/tamnd/aki">aki</a>,
@@ -37,7 +39,7 @@ echo "deb [signed-by=/usr/share/keyrings/tamnd.gpg] https://tamnd.github.io/linu
   | sudo tee /etc/apt/sources.list.d/tamnd.list
 
 sudo apt update
-sudo apt install yomi kage tori aki ami ccrawl</pre>
+sudo apt install yomi kage tori aki ami ccrawl kaku shirabe</pre>
 
 <h2>Fedora, RHEL, openSUSE (dnf)</h2>
 <pre>sudo dnf config-manager --add-repo https://tamnd.github.io/linux-repo/dnf/tamnd.repo
